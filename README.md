@@ -13,6 +13,7 @@ a specific focus on breast cancer diagnosis.
 - `dumpdrawer/`: folder containing initial testing codes and files to get accustomed to the material.
 - `MOGONET/`: folder containing original MOGONET implementation by Wang et al.
 - `SpikingGCN/`: folder containing code from the Spiking GCN by Zhu et al.
+- `SMOGONET.pdf`: scientific paper style report on the work done.
 
 ## USAGE:
 
@@ -72,7 +73,6 @@ python -W ignore SMOGONET/run_ea.py
 
 - [x] Update readme
 - [x] Project report
-- [ ] Presentation
 
 **Utils:**
 
