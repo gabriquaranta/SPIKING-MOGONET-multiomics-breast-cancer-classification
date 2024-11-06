@@ -1,0 +1,9 @@
+List of all paramns that can be optimized:
+
+- sgcns: hiddensize, beta
+
+- svcdn: hiddensize, beta1, beta2
+
+- pretrain: epochs 
+
+- train: epochs, learningrate, stepsize, gamma

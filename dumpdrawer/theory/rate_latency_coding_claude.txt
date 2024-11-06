@@ -1,0 +1,90 @@
+Small example to illustrate the difference between rate coding and latency
+coding for encoding a dataset of float values in a spiking neural network (SNN).
+Suppose we have a dataset consisting of the following float values: [0.2, 0.6,
+0.9, 0.4].
+
+
+Rate Coding: 
+    In rate coding, the float values are typically converted into
+    firing rates over a specific time window. Let's assume a time window of 10 time
+    steps for this example. After encoding using rate coding, the dataset might look
+    like this:
+
+    0.2 → [1, 0, 0, 1, 0, 0, 0, 0, 0, 0] (2 spikes in the time window)
+    0.6 → [1, 1, 1, 1, 1, 0, 0, 0, 0, 0] (6 spikes in the time window)
+    0.9 → [1, 1, 1, 1, 1, 1, 1, 1, 1, 0] (9 spikes in the time window)
+    0.4 → [1, 1, 0, 1, 0, 0, 0, 0, 0, 0] (4 spikes in the time window)
+
+    In this example, the higher the float value, the more spikes are generated
+    within the time window, representing a higher firing rate.
+
+
+Latency Coding:
+    In latency coding, the float values are typically converted into the timing
+    of the first spike relative to a reference time. Let's assume a time window
+    of 10 time steps again. After encoding using latency coding, the dataset
+    might look like this:
+
+    0.2 → [0, 0, 1, 0, 0, 0, 0, 0, 0, 0] (spike at time step 3)
+    0.6 → [0, 1, 0, 0, 0, 0, 0, 0, 0, 0] (spike at time step 2)
+    0.9 → [1, 0, 0, 0, 0, 0, 0, 0, 0, 0] (spike at time step 1)
+    0.4 → [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] (spike at time step 4)
+
+    In this example, the lower the float value, the later the first spike
+    occurs, representing a weaker input or response.
+
+
+Difference:
+    The main difference between the two encoding schemes is how the information
+    is represented and transmitted within the SNN:
+
+    Rate coding represents the information through the firing rate or average
+    spiking activity over a time window, where higher firing rates correspond to
+    higher float values. Latency coding represents the information through the
+    precise timing of the first spike, where earlier spikes correspond to higher
+    float values.
+
+    While both encoding schemes can represent the same dataset, they differ in
+    their temporal characteristics, efficiency, and potential implications for
+    information processing and energy consumption within the SNN.
+
+
+If the data you plan to use is not inherently temporal (i.e., it does not have a
+time dimension or temporal dynamics), then rate coding may be a more suitable
+choice compared to latency coding for encoding the data in a spiking neural
+network (SNN). 
+
+Here are a few reasons why rate coding could be preferred for non-temporal data:
+
+Simplicity of encoding:
+    Rate coding involves converting the input values (e.g., float values) into firing rates or average spike counts over a fixed time window. This encoding process is relatively straightforward and does not require preserving precise timing information, which can be more complex for latency coding.
+    Compatibility with non-temporal data:
+    Since the input data does not have a temporal dimension, the precise timing of spikes may not carry meaningful information. Rate coding, which focuses on the average firing rate or spike count, can represent the input values more naturally without relying on temporal dynamics.
+
+Interpretability and analysis:
+    Rate coding is generally more intuitive to interpret and analyze, as higher
+    firing rates correspond to larger input values. This can simplify the
+    understanding and analysis of the SNN's behavior, especially when working
+    with non-temporal data.
+
+Noise robustness:
+    Rate coding may be more robust to noise or variations in spike timing
+    compared to latency coding, which relies on precise spike timing. For
+    non-temporal data, this robustness can be advantageous, as the precise
+    timing of spikes is less critical.
+
+However, it's worth noting that even for non-temporal data, latency coding can
+still be employed in SNNs. In such cases, latency coding may be used as a way to
+introduce temporal dynamics or encode information in a more energy-efficient
+manner, even though the input data itself does not have an explicit temporal
+component. 
+
+Ultimately, the choice between rate coding and latency coding should
+also consider other factors, such as the specific application requirements,
+computational resources, and the trade-offs between energy efficiency, noise
+robustness, and interpretability. 
+
+If the non-temporal nature of the data is the
+primary consideration, rate coding may be a more straightforward and intuitive
+choice, especially for initial explorations or when simplicity and
+interpretability are prioritized.
